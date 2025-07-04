@@ -1,6 +1,6 @@
 {
   "name": "Wedding Invitation",
-  "short_name": "WedInv",
+  "short_name": "Wedding Invitation",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#000000",
