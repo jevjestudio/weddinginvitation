@@ -1,0 +1,20 @@
+{
+  "name": "Wedding Invitation",
+  "short_name": "WedInv",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#00ffcc",
+  "icons": [
+    {
+      "src": "assets/jevje.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/JEVJE.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
