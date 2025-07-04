@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="manifest" href="manifest.json" />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <title>Wedding Invitation</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    html {
+      scroll-padding-top: 80px; /* agar offset tidak tertutup header */
+    }
+
+    body {
+      font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      line-height: 1.6;
+      color: #fff;
+      background-color: rgb(34, 34, 54);
+      text-align: center;
+    }
+    .logo {
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: logoIn 1s ease-out forwards;
+  }
+  .splash-logo {
+    display: none;
+  }
+
+#splash-screen, 
+#splash-screen h2, 
+#splash-screen p, 
+#splash-screen .splash-logo {
+  color: whitesmoke !important;
+}
+
+
+  .content h2 {
+     line-height: 1;
+     font-size: 29px !important;
+     font-weight: normal;
+     font-style: italic;
+  }
+
+  .content p {
+    position: fixed;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-style: italic;
+    font-size: 20px;
+  }
+
+
+  /* Animasi keyframe */
+@keyframes logoIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+    header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+   background: rgba(26, 26, 46, 0.4); /* hitam 40% transparan */
+  backdrop-filter: blur(8px);     /* efek blur kaca (opsional) */
+  -webkit-backdrop-filter: blur(8px); /* untuk Safari */
+  z-index: 1000;
+
+}
+
+.header-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+}
+.header-main nav {
+  display: flex;
+  gap: 20px;
+}
+
+
+
+    header h1 {
+      font-size: 24px;
+      color: #00ffcc;
+    }
+    nav {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px 0;
+}
+
+    nav a {
+      margin: 0 15px;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #00ffcc;
+    }
+
+
+    section { 
+      padding: 50px 20px 30px;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+      color: whitesmoke;
+      text-align: center;
+      min-height: 50vh;
+      font-size: 20px;
+      background-color: rgb(26, 26, 46);
+      font-weight: normal;
+    }
+
+    
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .light-section {
+      background-color: whitesmoke;
+      max-width: 100%;
+      min-height: 100vh;
+  border-radius: 0%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: background-color 0.3s ease;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  color: black;
+  padding: 50px 20px 30px; 
+}
+
+    .services {
+      background-color: black;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #000;
+      color: #777;
+    }
+
+    /* PARALLAX SECTION */
+    .hero-parallax {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .parallax-bg {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0,0,0,0.4)),
+                    url("assets/SandiSafna5.jpg");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 100vh;
+      z-index: 1;
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+      backface-visibility: hidden;
+      transform-style: preserve-3d;
+    }
+
+    .hero-parallax .content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      color: rgb(212, 212, 211);
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+
+    .hero-parallax::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.1); /* overlay gelap */
+      z-index: 1;
+    }
+    .menu-toggle {
+  display: none;
+ 
+}
+#scrollToTop {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  font-size: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, color 0.3s ease;
+  z-index: 9999;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+#scrollToTop.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+#scrollToTop:hover {
+  transform: scale(1.2);
+}
+
+.image-row {
+  display: flex;
+  justify-content: center; /* Taruh gambar di tengah */
+  align-items: center;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.image-row img {
+  width: 45%; /* Sesuaikan agar tidak terlalu besar */
+  height: auto;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.photo-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 45%;
+  background-color: rgb(26, 26, 46);
+  border-radius: 20px;
+}
+
+.photo-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* rasio potong (1 lebar, 1 tinggi), ubah sesuai kebutuhan */
+  object-fit: cover;   /* auto crop gambar agar pas dengan frame */
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.photo-card img:hover {
+  transform: scale(1.03);
+  transition: transform 0.3s ease;
+}
+
+.photo-caption {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+  text-align: left;
+  font-size: 18px;
+  color: whitesmoke;
+  margin: 10px 0;
+  font-weight: normal;
+}
+
+#splash-screen {
+  display: none;
+}
+
+#countdown-container {
+  background-image: transparent !important;
+  color: whitesmoke;
+  font-weight: bold;
+  padding: 5px 10px;
+  margin-bottom: 20px;
+  margin-top: 15px;
+  border-radius: 12px;
+  display: inline-block;
+  padding-top: 1px;
+}
+
+
+.countdown-box {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap; /* tetap responsif di HP */
+
+}
+
+
+.time-segment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: whitesmoke;
+  border-radius: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 7px 10px;
+  text-align: center;
+  min-width: 70px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.time-segment .number {
+  font-size: 28px;
+  font-weight: bold;
+  color: rgb(26, 26, 46);
+  display: block;
+}
+
+.time-segment .label {
+  font-size: 14px;
+  color: rgb(26, 26, 46);
+  margin-top: 5px;
+}
+
+
+
+
+
+    @media (max-width: 932px) {
+
+
+      header h1 {
+      font-size: 20px;
+   }
+
+   .hero-parallax {
+    height: 100vh;
+   }
+
+    .content h2 {
+     line-height: 1;
+     font-size: 40px;
+  }
+
+   section {
+    text-align: center;
+    font-size: 5px;
+   } 
+
+  #splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: whitesmoke; /* akan ditimpa berdasarkan preferensi */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999;
+  transition: opacity 0.5s ease;
+  flex-direction: column;
+}
+
+/* Logo animasi */
+.splash-logo {
+  display: block;
+  font-size: 28px;
+  font-weight: bold;
+  opacity: 0;
+  transform: translateY(-10px);
+  animation: logoIn 1s ease-out forwards;
+}
+
+/* Animasi keyframe */
+@keyframes logoIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+   .header-main {
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px 20px;
+  }
+
+  .header-main nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    flex-direction: column;
+    background-color: #111;
+    width: max-content;
+    min-width: 150px;
+    padding: 10px 0;
+    border-radius: 8px 0 0 8px;
+    box-shadow: -4px 4px 10px rgba(0,0,0,0.4);
+    z-index: 999;
+  }
+
+  
+  .menu-toggle {
+    display: block;
+    font-size: 26px;
+    color: white;
+    background: none;
+    border: none;
+    align-self: flex-end;
+    cursor: pointer;
+  }
+  button:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+
+
+  nav {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #111;
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px 0;
+    border-radius: 6px;
+  }
+
+  nav.active {
+    display: flex;
+  }
+  nav a {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-bottom: 1px solid #222;
+  }
+
+  nav a:last-child {
+    border-bottom: none;
+  }
+  
+
+  .hero-parallax .content {
+    font-size: 1.5rem;
+    padding: 0 20px;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  section {
+    padding: 80px 20px 40px;
+  }
+
+  .parallax-bg {
+    background-size: cover;
+    height: 110vh;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+   .image-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .photo-card {
+    width: 100%;
+  }
+
+  #open-invitation {
+  padding: 12px 28px;
+  font-size: 18px;
+  background: rgb(26, 26, 46);
+  border: none;
+  border-radius: 30px;
+  color: whitesmoke;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  transform: translateY(10px);
+  animation: logoIn 1s ease-out forwards;
+}
+
+#open-invitation:hover {
+  transform: scale(1.05);
+}
+
+
+
+
+  /* --- MODE TERANG (jika sistem pengguna pakai Light Mode) --- */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-color: whitesmoke;
+    --text-color: black;
+    --accent-color: #00ffcc;
+    --nav-bg: rgba(255, 255, 255, 0.9);
+  }
+   #splash-screen {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0,0,0,0.4)),
+                    url("assets/SandiSafna2.jpg");
+    color: black;
+    background-size: cover;
+    background-position: center;
+  }
+  .header-main nav {
+    background-color: whitesmoke;
+  }
+  .menu-toggle {
+    color: whitesmoke;
+  }
+  #scrollToTop.dark-icon {
+  color: whitesmoke !important; /* putih untuk background gelap */
+}
+  
+}
+
+/* --- MODE GELAP (jika sistem pengguna pakai Dark Mode) --- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #000;
+    --text-color: whitesmoke;
+    --accent-color: #00ffcc;
+    --nav-bg: rgba(0, 0, 0, 0.8);
+    
+  }
+  #splash-screen {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0,0,0,0.4)),
+                    url("assets/SandiSafna2.jpg");
+    color: whitesmoke;
+    background-size: cover;
+    background-position: center;
+  }
+  .header-main nav {
+    background-color: black;
+  }
+  .menu-toggle {
+    color: whitesmoke;
+  }
+
+}
+/* --- GAYA DASAR --- */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+header h1 {
+  color: whitesmoke;
+}
+nav a {
+  color: var(--text-color);
+}
+nav a:hover {
+  color: var(--accent-color);
+}
+
+  
+
+#scrollToTop.dark-icon {
+  color: whitesmoke !important; /* putih untuk background gelap */
+}
+
+}
+
+
+
+  </style>
+</head>
+<body>
+  <div id="splash-screen">
+  <p style="font-size: 25px; font-family: 'Fahkwang'; font-weight: normal; color: whitesmoke; transform: translateY(-10px);
+  animation: logoIn 1s ease-out forwards; opacity: 0;">The Wedding of</p>  
+  <div class="splash-logo" style="margin-top: 0px; font-weight: normal; font-family: 'Great Vibes', cursive; font-size: 40px;">Sandi & Safna</div>
+  <br>
+  <p style="font-size: 25px; font-family:'Fahkwang';">Dear,</p>
+  <h2 id="dynamic-name" style="font-weight: normal; font-family:'Fahkwang'; font-size: 35px;"></h2>
+  <button id="open-invitation" style="margin-top: 20px; padding: 10px 20px; font-size: 18px; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Open Invitation</button>
+
+</div>
+
+<audio id="bg-music" src="assets/audio.mp3" preload="auto" loop></audio>
+
+<!-- ✅ FIXED: tambah id ke section agar <a href="#hero-parallax"> berfungsi -->
+<section id="hero-parallax" class="hero-parallax">
+  <div class="parallax-bg"></div>
+  <div class="content">
+    <h2>"dan<br>segala sesuatu<br>Kami ciptakan<br>berpasang-pasangan ...."</h2>
+    <p>(QS 51:49)</p>
+  </div>
+ 
+</section>
+
+<header>
+   <div class="header-main">
+    <h1 class="logo" style="font-family: 'Great Vibes', cursive; font-weight: normal; font-size: 30px;">Sandi & Safna</h1>
+
+    <nav>
+    <a class="logo" href="#hero-parallax">Home</a>
+    <a class="logo" href="#about">About</a>
+    <a class="logo" href="#countdown">Wedding Day</a>
+    <a class="logo" href="#services">Gallery</a>
+    </nav>
+
+  <button class="menu-toggle" aria-label="Toggle Menu">☰</button>
+  </div>
+ 
+</header>
+
+<section class="section" id="quran">
+
+    <h2>Ar-Rum</h2>
+    <h2>QS 30:21</h2>
+    <p style="margin-top: 20px; font-size: 25px;">وَمِنْ اٰيٰتِهٖٓ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا لِّتَسْكُنُوْٓا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً وَّرَحْمَةًۗ اِنَّ فِيْ ذٰلِكَ لَاٰيٰتٍ لِّقَوْمٍ يَّتَفَكَّرُوْنَ ۝٢١</p>
+    <br>
+    <p style="margin-top: 20px;">Di antara tanda-tanda (kebesaran)-Nya ialah bahwa Dia menciptakan pasangan-pasangan untukmu dari (jenis) dirimu sendiri agar kamu merasa tenteram kepadanya. Dia menjadikan di antaramu rasa cinta dan kasih sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir.</p>
+    
+
+
+</section>
+
+<section class="light-section" id="about">
+  
+  <p style="font-size: 25px;">بِسْــــــــــــــــــمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ</p>
+  <p style="font-size: 25px;">Atas izin-Nya, dua nama dipertemukan dalam satu cerita.</p>
+  <br>
+  <div class="image-row">
+    <div class="photo-card">
+    <img src="assets/Safna2.jpg" alt="Foto 1" class="left-img" />
+    <p class="photo-caption">Safna Erdila Azzahra<br><strong style="font-size: 35px; font-family: 'Great Vibes', cursive; font-weight: normal;">Safna</strong></p>
+    <br>
+    <p class="photo-caption" style="text-align: center;">Putri ketiga dari Bapak Dino Erwin dan Ibu Hadedy Selayu</p>
+    </div>
+    <div class="photo-card">
+    <img src="assets/Sandi2.jpg" alt="Foto 2" class="right-img" />
+    <p class="photo-caption">Sandiyala Adiwahyu Riski Samudra<br><strong style="font-size: 35px; font-family: 'Great Vibes', cursive; font-weight: normal;">Sandi</strong></p>
+    <br>
+    <p class="photo-caption" style="text-align: center;">Putra ketiga dari Bapak Eko Prayitno dan Ibu Sukarmini</p>
+    </div>
+  </div>
+  <br>
+  <br>
+</section>
+
+<section class="section" id="countdown" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0,0,0,0.5)),
+                    url('assets/SandiSafna4.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #000; /* fallback kalau gambar tidak muat seluruh section */">
+  <h2 style="text-align: center;">Wedding Day</h2>
+  <div id="countdown-container" class="countdown-box">
+    <div class="time-segment">
+      <span class="number" id="days">00</span>
+      <span class="label">Days</span>
+    </div>
+    <div class="time-segment">
+      <span class="number" id="hours">00</span>
+      <span class="label">Hours</span>
+    </div>
+    <div class="time-segment">
+      <span class="number" id="minutes">00</span>
+      <span class="label">Minutes</span>
+    </div>
+    <div class="time-segment">
+      <span class="number" id="seconds">00</span>
+      <span class="label">Seconds</span>
+    </div>
+  </div>
+  <hr>
+  <br>  
+  <p style="text-align: center;">Saturday, October 4, 2025</p>
+  <p style="text-align: center;">11:00 AM - 1:00 PM WIB</p>
+  <p style="text-align: center;">Syahida Inn, Jl. Kertamukti No.5, Cireundeu, Ciputat Timur, Tangerang Selatan</p>
+  <div style="text-align: center; margin-top: 20px;">
+  <a href="https://maps.app.goo.gl/wMj5QDDHinZYazWS6"
+     class="map-button"
+     target="_blank"
+     style="font-size: 15px; color: whitesmoke; text-decoration: underline;">
+    Go to Google Maps
+  </a>
+</div>
+</section>
+
+<section class="light-section" id="services">
+  <h2>Gallery</h2>
+  <p>Fotonya belum karna banyak wkwkwkw</p>
+</section>
+
+<footer>
+  &copy; 2025 Sandi & Safna Menuju Halal<br>Design by Sandi & Safna
+</footer>
+<button id="scrollToTop" aria-label="Scroll to top">&#8593;</button>
+
+
+
+<script>
+
+ 
+
+  // Terapkan untuk semua <a href="#..."> di navigasi
+  // Terapkan ke semua link navigasi yang href-nya ke #id
+document.querySelectorAll('nav a[href^="#"]').forEach(link => {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    const targetId = this.getAttribute('href');
+    const targetEl = document.querySelector(targetId);
+    if (targetEl) {
+      targetEl.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }
+  });
+});
+
+
+  const bg = document.querySelector('.parallax-bg');
+  const sections = document.querySelectorAll('section');
+
+  let lastScrollY = 0;
+  let ticking = false;
+
+  function updateEffects() {
+    // Parallax
+    const offset = lastScrollY * 0.4;
+    if (bg) {
+      bg.style.transform = `translate3d(0, ${offset}px, 0)`;
+    }
+
+    // Fade-in effect
+    const trigger = window.innerHeight * 0.85;
+    sections.forEach(section => {
+      const top = section.getBoundingClientRect().top;
+      if (top < trigger) {
+        section.classList.add('visible');
+      }
+    });
+
+    ticking = false;
+  }
+
+  function onScroll() {
+    lastScrollY = window.scrollY;
+    if (!ticking) {
+      requestAnimationFrame(updateEffects);
+      ticking = true;
+    }
+  }
+
+  window.addEventListener('scroll', onScroll);
+  window.addEventListener('load', updateEffects);
+   // Toggle hamburger menu
+  const menuToggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('header nav');
+  
+
+  menuToggle.addEventListener('click', () => {
+    nav.classList.toggle('active');
+  });
+  
+
+  // Auto-close menu after clicking link (mobile)
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      nav.classList.remove('active');
+    });
+  });
+  // Jika klik di luar nav/menu → tutup menu
+  document.addEventListener('click', (e) => {
+    if (!nav.contains(e.target) && !menuToggle.contains(e.target)) {
+      nav.classList.remove('active');
+      menuToggle.classList.remove('hidden');
+    }
+  });
+   const scrollBtn = document.getElementById("scrollToTop");
+
+  // Tampilkan tombol saat scroll ke bawah
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+      scrollBtn.classList.add("show");
+    } else {
+      scrollBtn.classList.remove("show");
+    }
+  });
+
+  // Scroll ke atas saat tombol diklik
+  scrollBtn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+ /// Observasi semua section terang
+  const observer = new IntersectionObserver(entries => {
+    let isInLightSection = false;
+
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        isInLightSection = true;
+      }
+    });
+
+    scrollBtn.classList.toggle("dark-icon", isInLightSection);
+  }, { threshold: 0.4 });
+
+  document.querySelectorAll('.light-section').forEach(section => {
+    observer.observe(section);
+  });
+   
+ document.addEventListener('DOMContentLoaded', () => {
+  const splash = document.getElementById('splash-screen');
+  const openBtn = document.getElementById('open-invitation');
+  const music = document.getElementById('bg-music');
+
+  const params = new URLSearchParams(window.location.search);
+  const nama = params.get("nama"); // contoh: ?nama=Sandi+Safna
+
+  if (nama) {
+    const titleEl = document.getElementById("dynamic-name");
+    if (titleEl) {
+      titleEl.textContent = nama.replace(/\+/g, " ");
+    }
+  }
+
+  openBtn.addEventListener('click', () => {
+    // 1. Sembunyikan splash screen
+    splash.style.opacity = '0';
+
+    setTimeout(() => {
+      splash.style.display = 'none';
+    }, 500);
+
+    // 2. Mulai musik
+    music.play().then(() => {
+      console.log("Musik dimulai.");
+    }).catch((e) => {
+      console.warn("Autoplay diblokir. Tampilkan tombol manual kalau perlu.", e);
+      alert("Musik tidak otomatis dimulai. Tekan tombol Play jika muncul.");
+    });
+
+    // 3. Scroll ke bagian utama
+    const hero = document.getElementById('hero-parallax');
+    if (hero) {
+      hero.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      console.warn("Element #hero-parallax tidak ditemukan");
+    }
+  });
+});
+
+function startCountdown() {
+  const targetDate = new Date("2025-10-04T11:00:00"); // Tanggal H
+  const daysEl = document.getElementById("days");
+  const hoursEl = document.getElementById("hours");
+  const minutesEl = document.getElementById("minutes");
+  const secondsEl = document.getElementById("seconds");
+
+  function updateCountdown() {
+    const now = new Date();
+    const diff = targetDate - now;
+
+    if (diff <= 0) {
+  document.getElementById("countdown-container").innerHTML = "💍 Hari Bahagia Telah Tiba!";
+  return;
+}
+
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    const minutes = Math.floor((diff / (1000 * 60)) % 60);
+    const seconds = Math.floor((diff / 1000) % 60);
+
+    daysEl.textContent = String(days).padStart(2, "0");
+    hoursEl.textContent = String(hours).padStart(2, "0");
+    minutesEl.textContent = String(minutes).padStart(2, "0");
+    secondsEl.textContent = String(seconds).padStart(2, "0");
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+}
+
+window.addEventListener("load", startCountdown);
+
+
+
+
+  
+
+</script>
+
+
+
+</body>
+</html>
