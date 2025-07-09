@@ -418,6 +418,14 @@
   animation: zoomIn 1.2s ease-out forwards;
 }
 
+    .parallax-bg-wrapper {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 100vh;
+  z-index: 1;
+  overflow: hidden;
+}
+
 
 
 
@@ -688,10 +696,12 @@ nav a:hover {
 
 <!-- ✅ FIXED: tambah id ke section agar <a href="#hero-parallax"> berfungsi -->
 <section id="hero-parallax" class="hero-parallax">
+  <div class="parallax-bg-wrapper">
   <div class="parallax-bg"></div>
   <div class="content">
     <h2>"dan<br>segala sesuatu<br>Kami ciptakan<br>berpasang-pasangan ...."</h2>
     <p>(QS 51:49)</p>
+  </div>
   </div>
  
 </section>
@@ -877,9 +887,9 @@ document.addEventListener('DOMContentLoaded', () => {
       alert("Musik tidak otomatis dimulai. Tekan tombol Play jika muncul.");
     });
 
-    const bg = document.querySelector('.parallax-bg');
-if (bg) {
-  bg.classList.add('zoom-in');
+   const bgWrapper = document.querySelector('.parallax-bg-wrapper');
+if (bgWrapper) {
+  bgWrapper.classList.add('zoom-in');
 }
 
     if (hero) {
