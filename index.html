@@ -403,6 +403,17 @@
   transform: translateY(0);
 }
 
+    @keyframes zoomIn {
+  from {
+    transform: scale(1);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
 
 
 
@@ -861,6 +872,11 @@ document.addEventListener('DOMContentLoaded', () => {
     music.play().catch(() => {
       alert("Musik tidak otomatis dimulai. Tekan tombol Play jika muncul.");
     });
+
+    const bg = document.querySelector('.parallax-bg');
+if (bg) {
+  bg.classList.add('zoom-in');
+}
 
     if (hero) {
       hero.scrollIntoView({ behavior: 'smooth' });
