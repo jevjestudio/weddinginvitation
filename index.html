@@ -443,6 +443,18 @@
    z-index: 2;
 }
 
+    #lightbox {
+  transition: opacity 0.3s ease;
+}
+
+#lightbox img {
+  transition: transform 0.3s ease;
+}
+
+#lightbox:hover img {
+  transform: scale(1.02);
+}
+
 
 
 
@@ -894,6 +906,13 @@ nav a:hover {
   </a>
 </section>
 
+  <!-- Lightbox -->
+<div id="lightbox" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
+  background: rgba(0,0,0,0.9); z-index:9999; justify-content:center; align-items:center;">
+  <img id="lightbox-img" src="" style="max-width:90%; max-height:90%; border-radius:10px; box-shadow: 0 0 20px rgba(255,255,255,0.3);" alt="Preview" />
+</div>
+
+
 <footer>
   &copy; 2025 Sandi & Safna Menuju Halal<br>Design by JEVJE Studio
 </footer>
@@ -1094,6 +1113,23 @@ function startCountdown() {
   updateCountdown();
   setInterval(updateCountdown, 1000);
 }
+
+  // Lightbox setup
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+
+  document.querySelectorAll(".gallery-item img").forEach(img => {
+    img.style.cursor = "pointer";
+    img.addEventListener("click", () => {
+      lightbox.style.display = "flex";
+      lightboxImg.src = img.src;
+    });
+  });
+
+  lightbox.addEventListener("click", () => {
+    lightbox.style.display = "none";
+  });
+  
 </script>
 
 
