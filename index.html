@@ -9,9 +9,91 @@
 
   <link rel="manifest" href="manifest.json" />
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <title>Wedding Invitation</title>
   <style>
+
+     :root{
+      --bg: #faf7f5;
+      --paper: #ffffff;
+      --ink: #2b2b2b;
+      --accent: #b68c6e; /* gold-ish */
+      --muted: #8a8a8a;
+      --ring: rgba(182,140,110,.25);
+    }
+    
+   
+    }
+    section#our-story{ 
+      max-width: 1100px; margin: 0 auto; padding: 56px 16px 72px;
+    }
+    .section-head{ text-align:center; margin-bottom: 24px; }
+    .eyebrow{ letter-spacing:.18em; text-transform:uppercase; color:var(--accent); font-weight:600; font-size:.88rem; }
+    .title{ font-family:"Playfair Display", serif; font-size: clamp(28px, 4vw, 42px); margin:8px 0 10px; }
+    .subtitle{ color:var(--muted); font-size: .98rem; }
+
+    /* Slider shell */
+    .slider{
+      position: relative;
+      margin-top: 28px;
+    }
+
+    /* The track uses native scrolling + scroll snap for super smooth feel */
+    .track{
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 100%;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth; /* smooth programmatic scrolls */
+      gap: 16px; /* visual gap that still snaps nicely */
+      padding: 8px 8px 24px; /* leave space for shadows */
+      -webkit-overflow-scrolling: touch; /* extra smooth on iOS */
+    }
+    
+
+    .slide{
+      scroll-snap-align: center; /* center each panel */
+      background-color: #ca8e8c;
+      border-radius: 20px; 
+      padding: 20px 20px 24px;
+      min-height: 280px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.06);
+      border: 1px solid rgba(182,140,110,.15);
+      display:flex; flex-direction:column; justify-content:center;
+    }
+
+    .story-number{ color:var(--accent); font-weight:700; letter-spacing:.12em; text-transform:uppercase; font-size:.8rem }
+    .story-title{ font-family:"Playfair Display", serif; font-size: clamp(22px, 3vw, 30px); margin:6px 0 8px }
+    .story-text{ font-size: 1.02rem; color: black; }
+
+    /* Nav buttons */
+    .nav{
+      position: absolute; inset: 0; pointer-events: none; 
+    }
+    .btn{
+      pointer-events: auto; position: absolute; top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px; border-radius: 999px; border: 1px solid rgba(0,0,0,.06);
+      background: #fff; display:grid; place-items:center; cursor:pointer;
+      box-shadow: 0 6px 16px rgba(0,0,0,.08);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .btn:hover{ transform: translateY(-50%) scale(1.04); box-shadow:0 10px 22px rgba(0,0,0,.12) }
+    .btn:active{ transform: translateY(-50%) scale(.98) }
+    .btn:focus-visible{ outline: 4px solid var(--ring) }
+    .prev{ left: -6px }
+    .next{ right: -6px }
+
+    .btn svg{ width: 22px; height: 22px; }
+
+    /* Dots */
+    .dots{ display:flex; justify-content:center; gap:10px; margin-top: 18px; }
+    .dot{ width: 9px; height:9px; border-radius:999px; background:#e6dcd5; border:1px solid rgba(0,0,0,.04); transition: transform .25s ease, background .25s ease }
+    .dot[aria-current="true"]{ background: var(--accent); transform: scale(1.4) }
+
+/* Sabuk pengaman tambahan */ html, body { overflow-x: hidden; }
+
     * {
       margin: 0;
       padding: 0;
@@ -119,6 +201,7 @@
       color: #00ffcc;
     }
 
+    
 
     section { 
       padding: 50px 20px 30px;
@@ -131,6 +214,7 @@
       font-size: 20px;
       background-color: rgb(26, 26, 46);
       font-weight: normal;
+      
     }
 
     
@@ -141,20 +225,19 @@
     }
 
     .light-section {
-      background-color: whitesmoke;
       max-width: 100%;
       min-height: 100vh;
-      border-radius: 0%;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      text-align: center;
-      transition: background-color 0.3s ease;
-      transition: opacity 0.8s ease, transform 0.8s ease;
-      color: black;
-      padding: 50px 20px 30px;
-      background-image: url("assets/rice-paper.webp"); /* atau ganti ke motif lain */
-      background-color: #ca8e8c;
-      background-repeat: repeat;
-      background-size: auto;
+  border-radius: 0%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: background-color 0.3s ease;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  color: black;
+  padding: 50px 20px 30px; 
+  background-image: url("assets/rice-paper.webp"); /* atau ganti ke motif lain */
+  background-color: #ca8e8c;
+  background-repeat: repeat;
+  background-size: auto;
 }
 
     .services {
@@ -460,10 +543,19 @@
 }
 
 
+ /* Optional: reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .track{ scroll-behavior: auto }
+      .btn{ transition:none }
+      .dot{ transition:none }
+    }
+
 
 
     @media (max-width: 932px) {
 
+      .btn{ display:none } /* native swipe is enough on phones */
+    
 
       header h1 {
       font-size: 20px;
@@ -591,6 +683,7 @@
     padding: 80px 20px 40px;
   }
 
+
   .parallax-bg {
     background-size: cover;
     height: 110vh;
@@ -637,9 +730,9 @@
   /* --- MODE TERANG (jika sistem pengguna pakai Light Mode) --- */
 @media (prefers-color-scheme: light) {
   :root {
-    --bg-color: whitesmoke;
+    --bg-color: #ca8e8c;
     --text-color: black;
-    --accent-color: #00ffcc;
+    --accent-color: #ca8e8c;
     --nav-bg: rgba(255, 255, 255, 0.9);
   }
    #splash-screen {
@@ -664,9 +757,9 @@
 /* --- MODE GELAP (jika sistem pengguna pakai Dark Mode) --- */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-color: #000;
+    --bg-color: #ca8e8c;
     --text-color: whitesmoke;
-    --accent-color: #00ffcc;
+    --accent-color: #ca8e8c;
     --nav-bg: rgba(0, 0, 0, 0.8);
     
   }
@@ -706,7 +799,10 @@ nav a:hover {
   color: whitesmoke !important; /* putih untuk background gelap */
 }
 
-}
+
+    }
+
+
 
 
 
@@ -743,10 +839,11 @@ nav a:hover {
     <h1 class="logo" style="font-family: 'Great Vibes', cursive; font-weight: normal; font-size: 30px;">Sandi & Safna</h1>
 
     <nav>
-    <a class="logo" href="#about">Tentang Kami</a>
+    <a class="logo" href="#hero-parallax">Home</a>
+    <a class="logo" href="#about">About</a>
+    <a class="logo" href="#services">Gallery</a>
     <a class="logo" href="#countdown">Wedding Day</a>
-    <a class="logo" href="#services">Galeri</a>
-    <a class="logo" href="#wishes">Harapan</a>
+    <a class="logo" href="#wishes">Wishes</a>
     </nav>
 
   <button class="menu-toggle" aria-label="Toggle Menu">☰</button>
@@ -789,48 +886,67 @@ nav a:hover {
   <br>
 </section>
 
-<section class="section" id="countdown" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0,0,0,0.5)),
-                    url('assets/SandiSafna4.webp');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-color: #000; /* fallback kalau gambar tidak muat seluruh section */">
-  <h2 style="text-align: center;">Wedding Day</h2>
-  <div id="countdown-container" class="countdown-box">
-    <div class="time-segment">
-      <span class="number" id="days">00</span>
-      <span class="label">Hari</span>
-    </div>
-    <div class="time-segment">
-      <span class="number" id="hours">00</span>
-      <span class="label">Jam</span>
-    </div>
-    <div class="time-segment">
-      <span class="number" id="minutes">00</span>
-      <span class="label">Menit</span>
-    </div>
-    <div class="time-segment">
-      <span class="number" id="seconds">00</span>
-      <span class="label">Detik</span>
-    </div>
-  </div>
-  <hr>
-  <br>  
-  <p style="text-align: center;">Sabtu, 4 Oktober 2025</p>
-  <p style="text-align: center;">11:00 - 13:00 WIB</p>
-  <p style="text-align: center;">Syahida Inn, Jl. Kertamukti No.5, Cireundeu, Ciputat Timur, Tangerang Selatan</p>
-  <div style="text-align: center; margin-top: 20px;">
-  <a href="https://maps.app.goo.gl/wMj5QDDHinZYazWS6"
-     class="map-button"
-     target="_blank"
-     style="font-size: 15px; color: whitesmoke; text-decoration: underline;">
-    Titik Lokasi
-  </a>
-</div>
-</section>
+<!-- SECTION: Our Story Slider (3 slides) -->
+  <section id="our-story" aria-label="Kisah Kami" style="border-radius: 60px 0px;">
+    
+      <div class="eyebrow">Our Story</div>
+      <h2 class="title">Jejak Kisah Cinta</h2>
+      <p class="subtitle">Tiga momen kecil yang menuntun kami ke hari bahagia.</p>
+    
 
-<section class="light-section" id="services">
-  <h2 style="margin-bottom: 30px;">Galeri</h2>
+    <div class="slider" data-slider>
+      <div class="track" data-track aria-live="polite">
+        <!-- SLIDE 1 -->
+        <article class="slide" aria-label="Bab 1: Pertemuan Pertama">
+          <div class="gallery-row">
+      <div class="gallery-item landscape"><img src="assets/SandiSafnaG2.webp" alt="Gambar 9"></div>
+    </div>
+          <div class="story-number">Bab 1</div>
+          <h3 class="story-title">Pandangan Pertama</h3>
+          <p class="story-text">
+            Kamu mau tulis apa di sini. Misalnya: “Kami pertama kali bertemu pada
+            tanggal sekian tahun sekian dan sebagainya di sebuah acara apa. Dari percakapan singkat,
+            kami menemukan banyak kesamaan—dan sejak itu, percakapan tidak pernah benar-benar
+            berakhir.”
+          </p>
+        </article>
+
+        <!-- SLIDE 2 -->
+        <article class="slide" aria-label="Bab 2: Perjalanan Bersama">
+          <div class="gallery-row">
+      <div class="gallery-item landscape"><img src="assets/SandiSafnaG2.webp" alt="Gambar 9"></div>
+    </div>
+          <div class="story-number">Bab 2</div>
+          <h3 class="story-title">Perjalanan Bersama</h3>
+          <p class="story-text">
+            Tulis highlight perjalanan. Misalnya: “Di antara sibuknya hari-hari, kami belajar
+            untuk saling menumbuhkan. Perjalanan, tawa, dan tantangan kecil membuat kami semakin
+            yakin untuk melangkah bersama.”
+          </p>
+        </article>
+
+        <!-- SLIDE 3 -->
+        <article class="slide" aria-label="Bab 3: Lamaran & Janji">
+          <div class="gallery-row">
+      <div class="gallery-item landscape"><img src="assets/SandiSafnaG2.webp" alt="Gambar 9"></div>
+    </div>
+          <div class="story-number">Bab 3</div>
+          <h3 class="story-title">Lamaran & Janji</h3>
+          <p class="story-text">
+            Tulis momen lamaran dan janji. Misalnya: “Pada tanggal sekian, di bawah langit
+            senja, kami saling berjanji untuk menjadi rumah satu sama lain. Kini, kami mengundang
+            Anda menjadi saksi hari bahagia kami.” Aseeeek wkwwkk
+          </p>
+        </article>
+      </div>
+
+    <!-- Pagination Dots -->
+    <div class="dots" role="tablist" aria-label="Navigasi cerita" data-dots></div>
+  </section>
+
+
+<section class="light-section" id="services" style="border-radius: 60px 0px;">
+  <h2 style="margin-bottom: 30px;">Gallery</h2>
 
    <div class="gallery-container"></div>
      <!-- Baris 1 -->
@@ -880,8 +996,53 @@ nav a:hover {
     </div>
 
     
-    
 </section>
+
+<section class="section" id="countdown" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0,0,0,0.5)),
+                    url('assets/SandiSafna4.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #000;
+  border-radius: 60px 0px; /* fallback kalau gambar tidak muat seluruh section */">
+  <h2 style="text-align: center;">Wedding Day</h2>
+  <div id="countdown-container" class="countdown-box">
+    <div class="time-segment">
+      <span class="number" id="days">00</span>
+      <span class="label">Days</span>
+    </div>
+    <div class="time-segment">
+      <span class="number" id="hours">00</span>
+      <span class="label">Hours</span>
+    </div>
+    <div class="time-segment">
+      <span class="number" id="minutes">00</span>
+      <span class="label">Minutes</span>
+    </div>
+    <div class="time-segment">
+      <span class="number" id="seconds">00</span>
+      <span class="label">Seconds</span>
+    </div>
+  </div>
+  <hr>
+  <br>  
+  <p style="text-align: center;">Saturday, October 4, 2025</p>
+  <p style="text-align: center;">11:00 - 13:00 WIB</p>
+  <p style="text-align: center;">Syahida Inn, Jl. Kertamukti No.5, Cireundeu, Ciputat Timur, Tangerang Selatan</p>
+  <div style="text-align: center; margin-top: 20px;">
+  <a href="https://maps.app.goo.gl/wMj5QDDHinZYazWS6"
+     class="map-button"
+     target="_blank"
+     style="font-size: 15px; color: whitesmoke; text-decoration: underline;">
+    Go to Google Maps
+  </a>
+</div>
+</section>
+
+<footer style="background-color: #ca8e8c; color: white; font-size: large; font-weight: normal;">
+  Your presence is a gift to us<br>
+</footer>
+
 
   <section class="light-section" id="wishes">
   <h2 class="fade-in" style="margin-bottom: 20px;">Doa & Harapan</h2>
@@ -1132,7 +1293,83 @@ function startCountdown() {
   lightbox.addEventListener("click", () => {
     lightbox.style.display = "none";
   });
-  
+
+  // Lightweight, smooth, accessible slider controls
+    (function(){
+      const slider = document.querySelector('[data-slider]');
+      if(!slider) return;
+      const track = slider.querySelector('[data-track]');
+      const prevBtn = slider.querySelector('[data-prev]');
+      const nextBtn = slider.querySelector('[data-next]');
+      const dotsWrap = document.querySelector('[data-dots]');
+
+      const slides = Array.from(track.children);
+
+      // Create dots
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'dot';
+        dot.type = 'button';
+        dot.setAttribute('role','tab');
+        dot.setAttribute('aria-label', `Pergi ke slide ${i+1}`);
+        dot.addEventListener('click', () => slides[i].scrollIntoView({behavior:'smooth', inline:'center'}));
+        dotsWrap.appendChild(dot);
+      });
+
+      const dots = Array.from(dotsWrap.children);
+
+      function update(){
+        // Find the most centered slide
+        const {left, width} = track.getBoundingClientRect();
+        const centerX = left + width/2;
+        let bestIndex = 0; let bestDist = Infinity;
+        slides.forEach((el, i) => {
+          const r = el.getBoundingClientRect();
+          const dist = Math.abs((r.left + r.right)/2 - centerX);
+          if(dist < bestDist){ bestDist = dist; bestIndex = i; }
+        });
+        dots.forEach((d,i)=> d.setAttribute('aria-current', i===bestIndex ? 'true':'false'));
+      }
+
+      // Initial & on scroll
+      update();
+      let raf;
+      track.addEventListener('scroll', () => {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(update);
+      }, {passive:true});
+
+      // Buttons
+      function move(dir){
+        const current = dots.findIndex(d => d.getAttribute('aria-current')==='true');
+        const target = Math.max(0, Math.min(slides.length - 1, current + dir));
+        slides[target].scrollIntoView({behavior:'smooth', inline:'center'});
+      }
+      prevBtn?.addEventListener('click', () => move(-1));
+      nextBtn?.addEventListener('click', () => move(1));
+
+      // Keyboard support when focused on track
+      track.tabIndex = 0;
+      track.addEventListener('keydown', (e) => {
+        if(e.key === 'ArrowRight') { e.preventDefault(); move(1); }
+        if(e.key === 'ArrowLeft')  { e.preventDefault(); move(-1); }
+      });
+
+      // Optional: drag-to-scroll with pointer (desktop)
+      let isDown = false, startX = 0, startLeft = 0;
+      track.addEventListener('pointerdown', (e)=>{
+        isDown = true; startX = e.clientX; startLeft = track.scrollLeft; track.setPointerCapture(e.pointerId);
+      });
+      track.addEventListener('pointermove', (e)=>{
+        if(!isDown) return; track.scrollLeft = startLeft - (e.clientX - startX);
+      });
+      ['pointerup','pointercancel','pointerleave'].forEach(type=>track.addEventListener(type, ()=>{ isDown=false; }));
+
+      // Resize observer to keep dot state correct
+      const ro = new ResizeObserver(() => update());
+      ro.observe(track);
+    })();
+
 </script>
 
 
