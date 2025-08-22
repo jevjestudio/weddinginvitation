@@ -36,7 +36,7 @@
     /* Slider shell */
     .slider{
       position: relative;
-      margin-top: 28px;
+      margin-top: 20px;
     }
 
     /* The track uses native scrolling + scroll snap for super smooth feel */
@@ -55,18 +55,18 @@
 
     .slide{
       scroll-snap-align: center; /* center each panel */
-      background-color: #ca8e8c;
+      background-color: rgb(26, 26, 46);
       border-radius: 20px; 
-      padding: 20px 20px 24px;
+      padding: 20px 20px 10px;
       min-height: 280px;
       box-shadow: 0 10px 30px rgba(0,0,0,.06);
       border: 1px solid rgba(182,140,110,.15);
-      display:flex; flex-direction:column; justify-content:center;
+      display:flex; flex-direction:column; j
     }
 
     .story-number{ color:var(--accent); font-weight:700; letter-spacing:.12em; text-transform:uppercase; font-size:.8rem }
-    .story-title{ font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: clamp(22px, 3vw, 30px); margin:6px 0 8px }
-    .story-text{ font-size: 1.02rem; color: black; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; text-align: justify;}
+    .story-title{ font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-size: clamp(22px, 3vw, 30px); margin:6px 0 8px }
+    .story-text{ font-size: 1.02rem; color: rgba(218, 216, 135, 0.877) !important; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; text-align: justify;}
 
     /* Nav buttons */
     .nav{
@@ -213,6 +213,10 @@
       min-height: 50vh;
       font-size: 20px;
       background-color: rgb(26, 26, 46);
+      background-image:  linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+    url("assets/BG Story 2.webp");
+      background-repeat: no-repeat;
+      background-size: cover;
       font-weight: normal;
       
     }
@@ -232,12 +236,12 @@
   text-align: center;
   transition: background-color 0.3s ease;
   transition: opacity 0.8s ease, transform 0.8s ease;
-  color: black;
+  color: rgba(252, 255, 66, 0.575);
   padding: 50px 20px 30px; 
-  background-image: url("assets/rice-paper.webp"); /* atau ganti ke motif lain */
-  background-color: #ca8e8c;
-  background-repeat: repeat;
-  background-size: auto;
+  background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+    url("assets/BG Story 2.webp");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
     .services {
@@ -247,7 +251,7 @@
     footer {
       text-align: center;
       padding: 20px;
-      background: #000;
+      background:black;
       color: #777;
     }
 
@@ -730,9 +734,9 @@
   /* --- MODE TERANG (jika sistem pengguna pakai Light Mode) --- */
 @media (prefers-color-scheme: light) {
   :root {
-    --bg-color: #ca8e8c;
+    --bg-color: black;
     --text-color: black;
-    --accent-color: #ca8e8c;
+    --accent-color: black;
     --nav-bg: rgba(255, 255, 255, 0.9);
   }
    #splash-screen {
@@ -757,9 +761,9 @@
 /* --- MODE GELAP (jika sistem pengguna pakai Dark Mode) --- */
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-color: #ca8e8c;
+    --bg-color: black;
     --text-color: whitesmoke;
-    --accent-color: #ca8e8c;
+    --accent-color: black;
     --nav-bg: rgba(0, 0, 0, 0.8);
     
   }
@@ -827,7 +831,7 @@ nav a:hover {
   <div class="parallax-bg-wrapper">
   <div class="parallax-bg"></div>
   <div class="content">
-    <h2>"Dan<br>Kami ciptakan<br>Kamu<br>berpasang-pasangan"</h2>
+    <h2>"Dan Kami<br>ciptakan kamu<br>berpasang-pasangan"</h2>
     <p>(QS 78:8)</p>
   </div>
   </div>
@@ -865,8 +869,8 @@ nav a:hover {
 
 <section class="light-section" id="about">
   
-  <p style="font-size: 25px;">بِسْــــــــــــــــــمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ</p>
-  <p style="font-size: 25px;">Atas izin-Nya, dua nama dipertemukan dalam satu cerita.</p>
+  <p style="font-size: 25px; color: whitesmoke; !important">بِسْــــــــــــــــــمِ اللهِ الرَّحْمَنِ الرَّحِيْمِ</p>
+  <p style="font-size: 20px; color: whitesmoke; !important">Atas izin-Nya, dua nama dipertemukan dalam satu cerita.</p>
   <br>
   <div class="image-row">
     <div class="photo-card">
@@ -887,7 +891,8 @@ nav a:hover {
 </section>
 
 <!-- SECTION: Our Story Slider (3 slides) -->
-  <section id="our-story" aria-label="Kisah Kami" style="border-radius: 60px 0px; background: url('assets/BG Story.webp')">
+  <section id="our-story" aria-label="Kisah Kami" style="border-radius: 60px 0px; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+    url('assets/BG Story.webp'); background-repeat: no-repeat; background-size: cover;">
     
       <div class="eyebrow">Our Story</div>
       <h2 class="title">Jejak Kisah Cinta</h2>
@@ -914,7 +919,7 @@ nav a:hover {
     </div>
           
           <h3 class="story-title">Perjalanan Bersama</h3>
-          <p class="story-text" style="color: rgb(26, 26, 46);"">
+          <p class="story-text" style="color: rgb(26, 26, 46);">
             Kami tumbuh bersama di tengah transisi dari remaja menuju dewasa. Suka dan duka kami lewati, saling menguatkan saat jalan terasa rumit. Tidak terlintas satu detik pun keinginan untuk melepas. Hanya keyakinan yang kian menguat bahwa kami akan terus melangkah bersama.	
           </p>
         </article>
@@ -1031,7 +1036,7 @@ nav a:hover {
 </div>
 </section>
 
-<footer style="background-color: #ca8e8c; color: rgb(255, 255, 255); font-size: large; font-weight: normal; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+<footer style="background-color: black; color: rgb(255, 255, 255); font-size: large; font-weight: normal; font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
   Your presence is a gift to us<br>
 </footer>
 
