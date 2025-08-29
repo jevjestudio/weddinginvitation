@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ucapan Terima Kasih</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: #faf7f5;
+      color: #2b2b2b;
+    }
+    .wedding-thanks {
+      --bg: #faf7f5;
+      --paper: #ffffff;
+      --ink: #2b2b2b;
+      --accent: #b68c6e;
+      padding: 48px 16px;
+      background:
+        radial-gradient(60% 80% at 50% -20%, rgba(182,140,110,0.15), transparent 60%),
+        var(--bg);
+      display: grid;
+      place-items: center;
+    }
+    .thanks-wrap {
+      max-width: 720px;
+      background: var(--paper);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 20px;
+      padding: 32px 28px;
+      text-align: center;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      position: relative;
+      overflow: hidden;
+    }
+    .thanks-wrap::before,
+    .thanks-wrap::after {
+      content: "";
+      position: absolute;
+      width: 140px; height: 140px;
+      background: conic-gradient(from 180deg at 50% 50%, rgba(182,140,110,0.18), transparent);
+      filter: blur(12px);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .thanks-wrap::before { top: -40px; left: -40px; }
+    .thanks-wrap::after  { bottom: -40px; right: -40px; }
+
+    h2 {
+      font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+      margin: 0 0 12px;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+    }
+    p {
+      margin: 8px 0;
+      line-height: 1.7;
+      font-size: 1.05rem;
+    }
+    .signature {
+      margin-top: 14px;
+      font-style: italic;
+      font-size: 1.1rem;
+    }
+    .names {
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .meta {
+      margin-top: 2px;
+      font-size: 0.95rem;
+      opacity: 0.8;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+      .thanks-wrap {
+        box-shadow: none;
+        border: none;
+        padding: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="wedding-thanks" aria-labelledby="thanks-title">
+    <div class="thanks-wrap">
+      <h2 id="thanks-title">Terima Kasih</h2>
+      <p>
+        Terima kasih yang sebesar-besarnya atas kehadiran dan doa restu Anda
+        di hari bahagia kami. Kehadiran Anda membuat momen ini semakin berarti.
+      </p>
+      <p class="signature">
+        — <span class="names">Sandiyala Adiwahyu Riski Samudra &amp; Safna Erdila Azzahra</span> —
+      </p>
+    </div>
+  </section>
+</body>
+</html>
